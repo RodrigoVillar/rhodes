@@ -4,18 +4,21 @@ class FrontEnd(object):
 
     def get_json(self):
         return json.dumps(self.__dict__)
-        
-class Stocks(object):
 
-    favorite_stocks = []
+class Stocks(FrontEnd):
+
+
+    def __init__(self):
+        self.favorite_stocks = ["AAPL", "TSLA"]
 
     def add_favorite_stock(self, input):
         self.favorite_stocks.append(input)
+        print(self.favorite_stocks)
 
     def delete_favorite_stock(self, input):
         self.favorite_stocks.remove(input)
 
-class Options(object):
+class Options(FrontEnd):
 
     favorite_options = []
 
@@ -25,7 +28,7 @@ class Options(object):
     def delete_favorite_option(self, input):
         self.favorite_options.remove(input)
 
-class Crypto(object):
+class Crypto(FrontEnd):
 
     favorite_cryptos = []
 
