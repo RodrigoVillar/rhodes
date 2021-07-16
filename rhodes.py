@@ -24,12 +24,13 @@ class Rhodes(object):
             while True:
                 command = input("Please enter a command here: ")
                 if command == 'stocks':
-                    print("you entered stocks!")
-                    print(self.stocks_obj.get_stock_price("CLF"))
+                    self.stocks_obj.run()
                 elif command == 'options':
-                    print("you entered options")
+                    self.options_obj.run()
                 elif command == 'crypto':
-                    print("you entered crypto")
+                    self.options_obj.run()
+                elif command == 'nimos':
+                    print("you selected nimos!")
                 elif command == 'exit':
                     quit()
                 else:
