@@ -1,4 +1,4 @@
-import json
+import json, config, requests
 
 class FrontEnd(object):
 
@@ -17,6 +17,14 @@ class Stocks(FrontEnd):
 
     def delete_favorite_stock(self, input):
         self.favorite_stocks.remove(input)
+
+    def get_stock_price(self, input):
+        # ADD SAFEGUARD AGAINST INVALID TICKERS
+        url = 'https://finnhub.io/api/v1/quote?symbol=' + str(input) + '&token=' + str(config.finhub_key)
+        r = requests.get(url)
+        temp = r.json()
+        return temp['c']
+
 
 class Options(FrontEnd):
 

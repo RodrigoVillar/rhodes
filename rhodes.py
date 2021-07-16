@@ -17,7 +17,6 @@ class Rhodes(object):
     # The following deals with the terminal interface
 
     def run(self):
-        print(self.stocks_obj.get_json())
         while True:
             print("\nWeclome to Rhodes! We currently offer tools catered to those investing in stocks, options, and cryptocurrencies!\n")
             print("The following commands are available: 'stocks' - takes you to the stocks section, \
@@ -26,6 +25,7 @@ class Rhodes(object):
                 command = input("Please enter a command here: ")
                 if command == 'stocks':
                     print("you entered stocks!")
+                    print(self.stocks_obj.get_stock_price("CLF"))
                 elif command == 'options':
                     print("you entered options")
                 elif command == 'crypto':
