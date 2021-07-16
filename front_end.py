@@ -20,7 +20,8 @@ class Stocks(FrontEnd):
 
 class Options(FrontEnd):
 
-    favorite_options = []
+    def __init__(self):
+        self.favorite_options = []
 
     def add_favorite_option(self, input):
         self.favorite_options.append(input)
@@ -30,7 +31,8 @@ class Options(FrontEnd):
 
 class Crypto(FrontEnd):
 
-    favorite_cryptos = []
+    def __init__(self):
+        self.favorite_cryptos = []
 
     def add_favorite_crypto(self, input):
         self.favorite_cryptos.append(input)

@@ -13,7 +13,7 @@ def start():
         quit()
     
     # Until there is a way to save user data, an Rhodes object is instantiated everytime we run Rhodes
-    x = rhodes.Rhodes("Rodrigo Villar", "07/16/2021")
+    x = rhodes.Rhodes("Rodrigo Villar")
     x.run()
     
 
