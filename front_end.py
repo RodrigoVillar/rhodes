@@ -41,7 +41,8 @@ class Stocks(FrontEnd):
 
     def save(self):
         print('\nSaving data!\n')
-        print(json.dumps(self.__dict__))
+        with open('user_data/wowigo/stocks.txt', 'w') as file:
+            json.dump(self.__dict__, file)
 
 
     def run_instructions(self):
