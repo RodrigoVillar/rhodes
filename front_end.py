@@ -23,20 +23,32 @@ class Stocks(FrontEnd):
                     stock = input("Please input the stock which you wish to remove: ")
                     self.delete_favorite_stock(stock)
                     self.continue_instructions()
+                elif command == 'add-favorite':
+                    stock = input("Please enter the ticker of the stock you wish to add to your favorites list: ")
+                    self.add_favorite_stock(stock)
+                    print("Action complete, your current stock favorites consists of the following: " + str(self.favorite_stocks))
+                    self.continue_instructions()
                 elif command == 'view-current-price':
                     stock = input("Please input a stock ticket to see its current price: ")
                     price = self.get_stock_price(stock)
                     print("The current price of " + stock + " is $" + str(price))
                     self.continue_instructions()
                 elif command == 'back':
+                    self.save()
                     return
                 else:
                     print("That command is invalid!")
 
+    def save(self):
+        print('\nSaving data!\n')
+        print(json.dumps(self.__dict__))
+
 
     def run_instructions(self):
         print("Welcome to the Stocks Section of Rhodes!")
-        print("The following commands are available to you:")
+        print("The following commands are available to you: 'view-favorites' - returns a list of your current favorite stocks, \
+'add-favorite' - allows you to add a stock to your favorites list, 'remove-favorite' - allows you to remove one of your favorite stocks,\
+'view-current-price' - allows you to view the current price of a stock, 'back' - returns you to the main menu of Rhodes.")
 
     def continue_instructions(self):
         print("You can continue to use any other command in the Stocks section of Rhodes")
@@ -77,7 +89,11 @@ class Crypto(FrontEnd):
         self.favorite_cryptos = []
 
     def run(self):
-        print("run!")
+        while True:
+            self.run_instructions()
+
+    def run_instructions(self):
+        print("Welcome to the Cryptocurrency Section of Rhodes!")
 
     def add_favorite_crypto(self, input):
         self.favorite_cryptos.append(input)

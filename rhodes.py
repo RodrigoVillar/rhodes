@@ -19,9 +19,9 @@ class Rhodes(object):
     def run(self):
         while True:
             print("\nWeclome to Rhodes! We currently offer tools catered to those investing in stocks, options, and cryptocurrencies!\n")
-            print("The following commands are available: 'stocks' - takes you to the stocks section, \
-'options' - takes you to the options section, 'crypto' - takes you to the crypto section. Additionally, entering 'exit' will let you end this session of Rhodes.\n")
             while True:
+                print("The following commands are available: 'stocks' - takes you to the stocks section, \
+'options' - takes you to the options section, 'crypto' - takes you to the crypto section. Additionally, entering 'exit' will let you end this session of Rhodes.\n")
                 command = input("Please enter a command here: ")
                 if command == 'stocks':
                     self.stocks_obj.run()
