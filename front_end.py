@@ -4,11 +4,17 @@ class FrontEnd(object):
 
     def get_json(self):
         return json.dumps(self.__dict__)
+    def set_username(self, input):
+        self.username = input
 
 class Stocks(FrontEnd):
 
-    def __init__(self):
-        self.favorite_stocks = []
+    def __init__(self, data = {}):
+        if data == {}: # If data is empty (in this case, a new user)
+            self.favorite_stocks = []
+        else: 
+            self.favorite_stocks = data['favorite_stocks']
+            self.username = data['username']
 
     def run(self):
         while True:
@@ -40,10 +46,8 @@ class Stocks(FrontEnd):
                     print("That command is invalid!")
 
     def save(self):
-        print('\nSaving data!\n')
-        with open('user_data/wowigo/stocks.txt', 'w') as file:
+        with open('user_data/' + self.username + '/stocks.json', 'w') as file:
             json.dump(self.__dict__, file)
-
 
     def run_instructions(self):
         print("Welcome to the Stocks Section of Rhodes!")
@@ -72,7 +76,7 @@ class Stocks(FrontEnd):
 
 class Options(FrontEnd):
 
-    def __init__(self):
+    def __init__(self, data = {}):
         self.favorite_options = []
 
     def run(self):
@@ -84,9 +88,13 @@ class Options(FrontEnd):
     def delete_favorite_option(self, input):
         self.favorite_options.remove(input)
 
+    def save(self):
+        with open('user_data/' + self.username + '/options.json', 'w') as file:
+            json.dump(self.__dict__, file)
+
 class Crypto(FrontEnd):
 
-    def __init__(self):
+    def __init__(self, data = {}):
         self.favorite_cryptos = []
 
     def run(self):
@@ -101,3 +109,7 @@ class Crypto(FrontEnd):
 
     def delete_favorite_crypto(self, input):
         self.favorite_crypto.remove(input)
+
+    def save(self):
+        with open('user_data/' + self.username + '/crypto.json', 'w') as file:
+            json.dump(self.__dict__, file)

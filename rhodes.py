@@ -1,4 +1,8 @@
-import front_end, datetime
+import front_end
+import datetime
+import json
+
+
 class Rhodes(object):
     """
     Main Object of Rhodes software
@@ -7,14 +11,45 @@ class Rhodes(object):
     """
 
     # The following methods deals with IF a new user is being created
-    def __init__(self, name):
-        self.name = name
-        self.date_joined = str(datetime.datetime.now())
-        self.stocks_obj = front_end.Stocks()
-        self.options_obj = front_end.Options()
-        self.crypto_obj = front_end.Crypto()
+    def __init__(self, username='new'):
+        if username == 'new':
+            self.date_joined = str(datetime.datetime.now())
+            self.stocks_obj = front_end.Stocks()
+            self.options_obj = front_end.Options()
+            self.crypto_obj = front_end.Crypto()
+            self.username = ''
+        else:
+            directory = 'user_data/' + str(username)  # Sets directory
+
+            stock_data = {}  # Sets variables for data to be pasted into
+            options_data = {}
+            crypto_data = {}
+
+            with open(directory + '/stocks.json') as stck:
+                stock_data = json.load(stck)
+            with open(directory + '/options.json') as opt:
+                options_data = json.load(opt)
+            with open(directory + '/crypto.json') as crypto:
+                crypto_data = json.load(crypto)
+
+            self.stocks_obj = front_end.Stocks(stock_data)
+            self.options_obj = front_end.Options(options_data)
+            self.crypto_obj = front_end.Crypto(crypto_data)
+
+            self.stocks_obj.set_username(username)
+            self.crypto_obj.set_username(username)
+            self.options_obj.set_username(username)
+
+            self.stocks_obj.save()
+            self.crypto_obj.save()
+            self.options_obj.save()
+
+            print('\nWelcome back ' + username + '!')
 
     # The following deals with the terminal interface
+    def set_username(self, input):
+        self.username = input
+        self.stocks_obj.set_username(input)
 
     def run(self):
         while True:
@@ -35,11 +70,3 @@ class Rhodes(object):
                     quit()
                 else:
                     print("Please enter a valid command!")
-
-
-
-
-
-        
-
-    
