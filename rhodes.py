@@ -11,8 +11,8 @@ class Rhodes(object):
     """
 
     # The following methods deals with IF a new user is being created
-    def __init__(self, username='new'):
-        if username == 'new':
+    def __init__(self, username=False):
+        if username == False:
             self.date_joined = str(datetime.datetime.now())
             self.stocks_obj = front_end.Stocks()
             self.options_obj = front_end.Options()
