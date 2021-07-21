@@ -92,6 +92,13 @@ class Rhodes(object):
         self.stocks_obj.set_username(input)
 
     def run(self):
+        """
+        The method responsible for the Rhodes user experience
+
+        When called, this method starts a while loop that is initially True; this outer while loop is what keeps the Rhodes from closing
+        after closing one of its component. The inner while loop (also initially True) is tasked with asking the user for their command
+        which will lead them to a component or to exit the program.
+        """
         while True:
             print("\nWeclome to Rhodes! We currently offer tools catered to those investing in stocks, options, and cryptocurrencies!\n")
             while True:
