@@ -92,8 +92,12 @@ if you are a new user!")
 
 def add_user(user):
     """
-    Helper function for start. When called, add_user() takes the input and appends it to the list of existing
-    user data
+    Helper function to start()
+
+    When called, add_user() will add the user's credentials to the system.
+
+    Parameter user: the users credentials
+    Precondition: user is a dictionary that contains the following keys: "username", "password"
     """
     login_file_json = {}
 
@@ -112,6 +116,9 @@ def create_files(username):
     based on the username given. It will then create the following files:
 
     crypto.json, options.json, stocks.json
+
+    Parameter username: the username of the user
+    Precondition: handled by script.py
 
     * When creating these files, create_files() will add an empty dictionary so these files are readable* 
     """
