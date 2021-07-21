@@ -1,3 +1,13 @@
+"""
+Script that acts as a precursor to Rhodes
+
+This script (script.py) is separated from the other Rhodes modules (rhodes.py, front_end.py, etc.) as it heavily relies on
+functions while the other Rhodes modules are more object-oriented. When run, this script calls start(), which performs login
+functions and eventually leads the user to the run() method of Rhodes. 
+
+This method is at the bottom of the Rhodes call stack.
+"""
+
 import secure
 import rhodes
 import os
