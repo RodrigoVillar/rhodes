@@ -63,7 +63,7 @@ class Rhodes(object):
                 elif command == 'options':
                     self.options_obj.run()
                 elif command == 'crypto':
-                    self.options_obj.run()
+                    self.crypto_obj.run()
                 elif command == 'nimos':
                     print("you selected nimos!")
                 elif command == 'exit':

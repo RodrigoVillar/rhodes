@@ -109,20 +109,59 @@ class Options(FrontEnd):
 class Crypto(FrontEnd):
 
     def __init__(self, data={}):
-        self.favorite_cryptos = []
+        if data == {}:
+            self.favorite_cryptos = []
+        else:
+            self.favorite_cryptos = data["favorite_cryptos"]
+            self.username = data["username"]
 
     def run(self):
         while True:
             self.run_instructions()
+            while True:
+                command = input("Please enter a command: ")
+                if command == 'back':
+                    self.save()
+                    return
+                elif command == 'view-favorites':
+                    print("Your current crypto favorites consist of the following: " +
+                          str(self.favorite_cryptos))
+                    self.continue_instructions()
+                elif command == 'add-favorite':
+                    temp = input(
+                        "Please enter the cryptocurrency which that you wish to add to your favorites list: ")
+                    self.add_favorite_crypto(temp)
+                    self.continue_instructions()
+                elif command == 'get-current-price':
+                    temp = input(
+                        "Please enter the cryptocurrency which you wish to get the price of: ")
+                    self.get_current_price(temp)
+                    self.continue_instructions()
+                else:
+                    print("That command is invalid!")
 
     def run_instructions(self):
         print("Welcome to the Cryptocurrency Section of Rhodes!")
+        print("The following commands are available to you: ")
+        print("Additionally, you can enter 'back' to return to the home screen of Rhodes")
+
+    def continue_instructions(self):
+        print("The following commands are available to you: ")
+        print("Additionally, you can enter 'back' to return to the home screen of Rhodes")
 
     def add_favorite_crypto(self, input):
         self.favorite_cryptos.append(input)
 
     def delete_favorite_crypto(self, input):
         self.favorite_crypto.remove(input)
+
+    def get_current_price(self, input):
+        url = "https://api.nomics.com/v1/currencies/ticker?key=" + config.nomics_key + \
+            "&ids=" + input + "&interval=1d&convert=USD&per-page=100&page=1"
+        r = requests.get(url)
+        r_json = r.json()
+        result = "The current price of " + input + "is " + str(r_json["price"])
+        return result
 
     def save(self):
         with open('user_data/' + self.username + '/crypto.json', 'w') as file:
