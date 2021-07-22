@@ -61,6 +61,8 @@ class Rhodes(object):
                 options_data = json.load(opt)
             with open(directory + '/crypto.json') as crypto:
                 crypto_data = json.load(crypto)
+            with open(directory + '/rhodes.json') as rho:
+                rhodes_data = json.load(rho)
 
             self.stocks_obj = front_end.Stocks(stock_data)
             self.options_obj = front_end.Options(options_data)
@@ -73,6 +75,9 @@ class Rhodes(object):
             self.stocks_obj.save()
             self.crypto_obj.save()
             self.options_obj.save()
+
+            self.date_joined = rhodes_data['date_joined']
+            self.username = username
 
             print('\nWelcome back ' + username + '!')
 
@@ -142,4 +147,9 @@ class Rhodes(object):
                     print("Please enter a valid command!")
 
     def save(self):
-        print("Hello world!")
+        result = {
+            'date_joined': self.date_joined,
+            'username': self.username
+        }
+        with open('user_data/' + self.username + '/rhodes.json', 'w') as file:
+            json.dump(result, file)
