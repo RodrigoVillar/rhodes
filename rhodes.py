@@ -8,6 +8,7 @@ most part, most actions they take here will begin here and continue in another m
 import front_end
 import datetime
 import json
+import datetime
 
 
 class Rhodes(object):
@@ -19,7 +20,7 @@ class Rhodes(object):
     Invariant: handled by script.py
 
     Attribute date_joined: the data/time which the user first created their Rhodes account
-    Invariant: date_joined is a string that represents the true date/time the user joined Rhodes
+    Invariant: date_joined is a tuple that is ordered as the following: year, month, day, hour, minute, second
 
     Attribute stocks_obj: the stocks object assigned to the user
     Invariant: stocks_obj is of type Stocks
@@ -42,7 +43,7 @@ class Rhodes(object):
         """
 
         if username == False:
-            self.date_joined = str(datetime.datetime.now())
+            self.date_joined = self.set_date_joined()
             self.stocks_obj = front_end.Stocks()
             self.options_obj = front_end.Options()
             self.crypto_obj = front_end.Crypto()
@@ -76,6 +77,27 @@ class Rhodes(object):
             print('\nWelcome back ' + username + '!')
 
     # The following deals with the terminal interface
+
+    def set_date_joined(self):
+        """
+        Helper function for __init__()
+
+        This method is to be used when creating the profile of a new user. When called, this method
+        initializes a datetime object which data will be pulled from. A list is then created, and all
+        necessary values (year, month, day, hour, minute, second) is apended to the list. This method
+        then returns the tuple form of the list
+        """
+        temp = datetime.datetime.now()
+
+        date_list = []
+        date_list.append(temp.year)
+        date_list.append(temp.month)
+        date_list.append(temp.day)
+        date_list.append(temp.hour)
+        date_list.append(temp.minute)
+        date_list.append(temp.second)
+
+        return tuple(date_list)
 
     def set_username(self, input):
         """
@@ -114,6 +136,10 @@ class Rhodes(object):
                 elif command == 'nimos':
                     print("you selected nimos!")
                 elif command == 'exit':
+                    self.save()
                     quit()
                 else:
                     print("Please enter a valid command!")
+
+    def save(self):
+        print("Hello world!")
