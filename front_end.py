@@ -308,10 +308,10 @@ class Crypto(FrontEnd):
 
         url = "https://api.nomics.com/v1/currencies/ticker?key=" + config.nomics_key + \
             "&ids=" + str(input) + \
-                          "&interval=1d&convert=USD&per-page=100&page=1"
+            "&interval=1d&convert=USD&per-page=100&page=1"
         r = requests.get(url)
         r_json = r.json()
-        return str(r_json["price"]
+        return str(r_json["price"])
 
     def save(self):
         """
