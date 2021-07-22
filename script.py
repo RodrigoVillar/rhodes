@@ -46,8 +46,11 @@ if you are a new user!")
             user_t2 = input(
                 "Please re-enter your username to confirm your choice: ")
             if user_t1 == user_t2:  # If user typed same username twice
-                un = user_t1
-                break
+                if unique_username(user_t1):
+                    un = user_t1
+                    break
+                else:
+                    print("Sorry, but that username is taken. Please try again!")
             else:  # If user failed to type same username twice
                 print('You did not enter the same username twice, please try again!')
 
@@ -135,6 +138,28 @@ def create_files(username):
         json.dump(empty_json, opt)
     with open(os.path.join(folder_location, 'rhodes.json'), 'w') as rho:
         json.dump(empty_json, rho)
+
+
+def unique_username(input):
+    """
+    Helper function to start()
+
+    When called, unique_username() first grabs data from the json containing all login information. It then
+    loops through each username with the condition: if any username matches input, it returns False. Otherwise, it returns True.
+
+    Parameter input: the desired username of the user
+    Precondition: none
+    """
+    with open("logins.json", "r") as file:
+        logins = json.load(file)
+
+    login_list = logins["user_data"]
+
+    for x in login_list:
+        if x["username"].lower() == input.lower():
+            return False
+
+    return True
 
 
 if __name__ == "__main__":
