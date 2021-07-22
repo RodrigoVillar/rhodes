@@ -130,7 +130,8 @@ class Rhodes(object):
             print("\nWeclome to Rhodes! We currently offer tools catered to those investing in stocks, options, and cryptocurrencies!\n")
             while True:
                 print("The following commands are available: 'stocks' - takes you to the stocks section, \
-'options' - takes you to the options section, 'crypto' - takes you to the crypto section. Additionally, entering 'exit' will let you end this session of Rhodes.\n")
+'options' - takes you to the options section, 'crypto' - takes you to the crypto section, 'user-info' - returns information about the user. \
+Additionally, entering 'exit' will let you end this session of Rhodes.\n")
                 command = input("Please enter a command here: ")
                 if command == 'stocks':
                     self.stocks_obj.run()
@@ -143,8 +144,20 @@ class Rhodes(object):
                 elif command == 'exit':
                     self.save()
                     quit()
+                elif command == 'user-info':
+                    self.get_user_info()
                 else:
                     print("Please enter a valid command!")
+
+    def get_user_info(self):
+        """
+        When called, this method prints information regarding the user's account
+        """
+        x = datetime.datetime(self.date_joined[0], self.date_joined[1],
+                              self.date_joined[2], self.date_joined[3], self.date_joined[4])
+        print("Username: " + self.username)
+        print("Date Joined: " + x.strftime("%B") + ' ' +
+              x.strftime("%d") + ', ' + x.strftime("%Y") + '.')
 
     def save(self):
         """
