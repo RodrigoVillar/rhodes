@@ -96,8 +96,6 @@ class Stocks(FrontEnd):
                     stock = input(
                         "Please enter the ticker of the stock you wish to add to your favorites list: ")
                     self.add_favorite_stock(stock)
-                    print(
-                        "Action complete, your current stock favorites consists of the following: " + str(self.favorite_stocks))
                     self.continue_instructions()
                 elif command == 'view-current-price':
                     stock = input(
@@ -143,8 +141,16 @@ class Stocks(FrontEnd):
         Attribute input: the stock to be added to favorite_stocks
         Precondition: input is a valid stock ticker
         """
-        self.favorite_stocks.append(input)
-        print(self.favorite_stocks)
+        url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + \
+            str(input) + "&apikey=" + str(config.alpha_vantage_key)
+        r = requests.get(url)
+        temp = r.json()
+        if temp == {}:
+            print("That is not a valid stock ticker, please try again!")
+        else:
+            self.favorite_stocks.append(input)
+            print("Successfully added " + input +
+                  " to your favorite stocks list!")
 
     def delete_favorite_stock(self, input):
         """
