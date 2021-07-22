@@ -147,6 +147,11 @@ class Rhodes(object):
                     print("Please enter a valid command!")
 
     def save(self):
+        """
+        This method is responsible for saving the attributes of the user's Rhodes object whenever
+        they exit the program and saves it to the user's respective rhodes.json file
+        """
+
         result = {
             'date_joined': self.date_joined,
             'username': self.username
