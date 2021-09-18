@@ -100,9 +100,7 @@ class Stocks(FrontEnd):
                 elif command == 'view-current-price':
                     stock = input(
                         "Please input a stock ticket to see its current price: ")
-                    price = self.get_stock_price(stock)
-                    print("The current price of " +
-                          stock + " is $" + str(price))
+                    self.get_stock_price(stock)
                     self.continue_instructions()
                 elif command == 'back':
                     self.save()
@@ -159,7 +157,16 @@ class Stocks(FrontEnd):
         Attribute input: the stock to be removed from favorite_stocks
         Precondition: input is an element of favorite_stocks
         """
-        self.favorite_stocks.remove(input)
+        stock_present = False
+        for x in self.favorite_stocks:
+            if x == input:
+                stock_present = True
+        if stock_present:
+            self.favorite_stocks.remove(input)
+            print("You have successfully removed " +
+                  input + " from your favorite stocks list!")
+        else:
+            print("Sorry, but this stock isn't present in your favorite stocks list.\n")
 
     def get_stock_price(self, input):
         """
@@ -173,7 +180,11 @@ class Stocks(FrontEnd):
             str(input) + '&token=' + str(config.finhub_key)
         r = requests.get(url)
         temp = r.json()
-        return temp['c']
+        if temp['c'] == 0:
+            print("Sorry, but that isn't a valid stock ticker.")
+        else:
+            print("The current stock price of " +
+                  input + " is $" + str(temp['c']))
 
 
 class Options(FrontEnd):
