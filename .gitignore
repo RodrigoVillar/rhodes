@@ -1,0 +1,12 @@
+/venv
+rhodes_admin.py
+back_end.py
+config.py
+rhodes.code-workspace
+/__pycache__
+test.py
+config.pyc
+rhodes.pyc
+secure.pyc
+devnotes.txt
+.DS_Store
